@@ -16,6 +16,12 @@ const Todo = () => {
         setTask(""); // Limpiar el input
     };
 
+    // Nueva función para eliminar una tarea
+    const removeTodo = (id) => {
+        setTodos(todos.filter((todo) => todo.id !== id));
+    };
+    
+
 
 
     return (
@@ -26,14 +32,17 @@ const Todo = () => {
                     type="text"
                     value={task}
                     onChange={(e) => setTask(e.target.value)}
-                    placeholder="Add a new task..."
+                    placeholder="Agrega una tarea..."
                 />
-                <button onClick={addTodo}>Add</button>
+                <button onClick={addTodo}>Agregar</button>
             </div>
             <ul className="todo-list">
                 {todos.map((todo) => (
                     <li key={todo.id} className={todo.completed ? "completed" : ""}>
-                        <span onClick={() => toggleComplete(todo.id)}>{todo.text}</span>
+                        <span>
+                            {todo.text}{" "}
+                            <button onClick={() => removeTodo(todo.id)}>X</button>
+                        </span>
                     </li>
                 ))}
             </ul>
